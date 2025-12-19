@@ -10,7 +10,11 @@ static struct proc_dir_entry *our_proc_file = NULL;
 
 static ssize_t profile_read(struct file *file_pointer, char __user *buffer,
                             size_t buffer_length, loff_t *offset) {
-    char s[] = "Tomsk State University\n";
+    // Ответ на индивидуальное задание: расчет рейсов Титаника
+    char s[] = "Titanic UK-NY round trips: 3144\n"
+           "Calculation: 112 years * 365.25 days = 40,908 days\n"
+           "One round trip: 13 days\n"
+           "40,908 / 13 = 3,144\n"; 
     size_t len = sizeof(s) - 1;
     
     if (*offset >= len)
@@ -38,6 +42,7 @@ static const struct file_operations proc_file_fops = {
 #endif
 
 static int __init procfs1_init(void) {
+    
     our_proc_file = proc_create(procfs_name, 0644, NULL, &proc_file_fops);
     
     if (our_proc_file == NULL) {
